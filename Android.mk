@@ -30,6 +30,10 @@ LOCAL_MODULE_CLASS := STATIC_LIBRARIES
 LOCAL_CLANG := true
 LOCAL_CFLAGS := -integrated-as
 
+# Disable link time optimization here so we may keep it enabled globally
+# and also build compiler-rt with clang.
+LOCAL_CFLAGS += -fno-lto
+
 # Pull in platform-independent functionality
 LOCAL_WHOLE_STATIC_LIBRARIES += libcompiler-rt-builtins libcompiler-rt-extras
 

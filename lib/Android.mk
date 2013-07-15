@@ -30,6 +30,10 @@ LOCAL_MODULE_CLASS := STATIC_LIBRARIES
 LOCAL_CLANG := true
 #LOCAL_CFLAGS := -integrated-as
 
+# Disable link time optimization here so we may keep it enabled globally
+# and also build compiler-rt with clang.
+LOCAL_CFLAGS += -fno-lto
+
 # Skip atomic.c since it needs to be built separately according to the docs.
 # Skip clear_cache.c since it redefines a system function on Android.
 LOCAL_SRC_FILES += \
@@ -175,6 +179,10 @@ LOCAL_MODULE := libcompiler-rt-extras
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := STATIC_LIBRARIES
 LOCAL_CLANG := true
+
+# Disable link time optimization here so we may keep it enabled globally
+# and also build compiler-rt with clang.
+LOCAL_CFLAGS += -fno-lto
 
 LOCAL_SRC_FILES += \
   mulodi4.c

@@ -90,6 +90,11 @@ LOCAL_CFLAGS += $(asan_rtl_cflags)
 LOCAL_SRC_FILES := asan_android_stub.cc
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_CLANG := true
+
+# Disable link time optimization here so we may keep it enabled globally
+# and also build compiler-rt with clang.
+LOCAL_CFLAGS += -fno-lto
+
 include $(BUILD_STATIC_LIBRARY)
 
 
@@ -107,6 +112,11 @@ LOCAL_SRC_FILES := $(asan_rtl_files)
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_SHARED_LIBRARIES := libc libstlport libdl
 LOCAL_CLANG := true
+
+# Disable link time optimization here so we may keep it enabled globally
+# and also build compiler-rt with clang.
+LOCAL_CFLAGS += -fno-lto
+
 include $(BUILD_SHARED_LIBRARY)
 
 
@@ -143,6 +153,11 @@ LOCAL_CFLAGS += \
 LOCAL_SRC_FILES := tests/asan_noinst_test.cc
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_CLANG := true
+
+# Disable link time optimization here so we may keep it enabled globally
+# and also build compiler-rt with clang.
+LOCAL_CFLAGS += -fno-lto
+
 include $(BUILD_STATIC_LIBRARY)
 
 
@@ -161,6 +176,10 @@ LOCAL_CPP_EXTENSION := .cc
 LOCAL_STATIC_LIBRARIES := libgtest libasan_noinst_test
 LOCAL_SHARED_LIBRARIES := libc libstlport
 LOCAL_ADDRESS_SANITIZER := true
+
+# Disable link time optimization here so we may keep it enabled globally
+# and also build compiler-rt with clang.
+LOCAL_CFLAGS += -fno-lto
 
 include $(BUILD_EXECUTABLE)
 
